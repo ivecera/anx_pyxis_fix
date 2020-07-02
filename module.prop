@@ -1,7 +1,6 @@
-id=MMT-Ex
-name=Magisk Module Template Extended
-version=v1.5
-versionCode=6
-author=Zackptg5
-description=
-support=https://forum.xda-developers.com/apps/magisk/MMT-Extended
+id=anx_pyxis_fix
+name=Pyxis Fix for ANXCamera
+version=v1.0
+versionCode=1
+author=Cera
+description=Mi 9 Lite (pyxis) fix for ANXCamera
