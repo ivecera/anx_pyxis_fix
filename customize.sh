@@ -11,7 +11,7 @@
 # Uncomment and change 'MINAPI' and 'MAXAPI' to the minimum and maximum android version for your mod
 # Uncomment DYNLIB if you want libs installed to vendor for oreo+ and system for anything older
 # Uncomment DEBUG if you want full debug logs (saved to /sdcard)
-#MINAPI=21
+MINAPI=29
 #MAXAPI=25
 #DYNLIB=true
 #DEBUG=true
@@ -41,22 +41,24 @@ REPLACE="
 ##########################################################################################
 
 set_permissions() {
-  : # Remove this if adding to this function
-
   # Note that all files/folders in magisk module directory have the $MODPATH prefix - keep this prefix on all of your files/folders
   # Some examples:
   
   # For directories (includes files in them):
   # set_perm_recursive  <dirname>                <owner> <group> <dirpermission> <filepermission> <contexts> (default: u:object_r:system_file:s0)
   
-  # set_perm_recursive $MODPATH/system/lib 0 0 0755 0644
-  # set_perm_recursive $MODPATH/system/vendor/lib/soundfx 0 0 0755 0644
-
   # For files (not in directories taken care of above)
   # set_perm  <filename>                         <owner> <group> <permission> <contexts> (default: u:object_r:system_file:s0)
   
-  # set_perm $MODPATH/system/lib/libart.so 0 0 0644
-  # set_perm /data/local/tmp/file.txt 0 0 644
+  set_perm $MODPATH/system/lib/libcameraservice.so 0 0 0644
+  set_perm $MODPATH/system/lib/vendor.qti.hardware.camera.device@3.2.so 0 0 0644
+  set_perm $MODPATH/system/lib64/libcameraservice.so 0 0 0644
+  set_perm $MODPATH/system/lib64/vendor.qti.hardware.camera.device@3.2.so 0 0 0644
+
+  set_perm $MODPATH/system/vendor/lib/android.hardware.camera.provider@2.4-legacy.so 0 0 0644 u:object_r:vendor_file:s0
+  set_perm $MODPATH/system/vendor/lib/vendor.qti.hardware.camera.device@3.2.so 0 0 0644 u:object_r:vendor_file:s0
+  set_perm $MODPATH/system/vendor/lib64/android.hardware.camera.provider@2.4-legacy.so 0 0 0644 u:object_r:vendor_file:s0
+  set_perm $MODPATH/system/vendor/lib64/vendor.qti.hardware.camera.device@3.2.so 0 0 0644 u:object_r:vendor_file:s0
 }
 
 ##########################################################################################
