@@ -1,35 +1,29 @@
-<h1 align="center">Magisk Module Template Extended (MMT-Ex)</h1>
+# ANXCamera fixes for Mi 9 Lite Magisk Module
 
-<div align="center">
-  <!-- Version -->
-    <img src="https://img.shields.io/badge/Version-v1.5-blue.svg?longCache=true&style=popout-square"
-      alt="Version" />
-  <!-- Last Updated -->
-    <img src="https://img.shields.io/badge/Updated-March 27, 2020-green.svg?longCache=true&style=flat-square"
-      alt="_time_stamp_" />
-</div>
+## Description
+Various features (48 mpix, portrat mode...) of ANXCamera are broken on custom ROMs on Mi 9 Lite (aka pyxis).
+This module goal is fix this issues so one can use __unmodified__ ANXCamera on this device with all features.
 
-<div align="center">
-  <strong>MMT Extended is the spiritual successor of Unity and makes magisk module creation easy. More details in the 
-    <a href="https://github.com/Zackptg5/MMT-Extended/wiki">wiki</a>.
-</div>
+_Verified on Evolution-X using ANXCamera 182 & 184_
 
-<div align="center">
-  <h3>
-    <a href="https://github.com/Zackptg5/MMT-Extended">
-      Source Code
-    </a>
-    <span> | </span>
-    <a href="https://github.com/Zackptg5/MMT-Extended-Addons">
-      Addons Repository
-    </a>
-    <span> | </span>
-    <a href="https://forum.xda-developers.com/apps/magisk/magisk-module-template-extended-mmt-ex-t4029819">
-      XDA
-    </a>
-  </h3>
-</div>
+### What works
+- 48 MPix (aka Ultrapixel) mode
+- Ultrawide sensor
+- RAW capture in Pro mode
+- Portrait mode for back camera
 
-### Usage
-- [Follow the directions here (DO NOT FORK)](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template)
-- Then follow instructions in [Wiki](https://github.com/Zackptg5/MMT-Extended/wiki)
+### What does NOT work (yet)
+- Portrait mode for front camera
+
+## Technical details
+The MiuiCamera (a base for ANXCamera) uses different mapping of camera IDs than AOSP. While AOSP generates
+sequence 0...11 for camera IDs on pyxis but the MiUi uses { 0, 1, 21, 20, 62, 60, 63, 61, 91, 90, 100, 101 }.
+
+The problem is that ANXCamera uses hardcoded values for certain sensors. So camera ID for ultrawide sensors needs to be 21, for Tele 20 etc. Without proper mapping user usually gets "Can't connect to camera" error message because the ANXCamera tries to open camera with non-existent camera ID.
+
+The mapping on MIUI is driven by the property `camera.xiaomi.remapid`
+
+    pyxis:/ $ getprop camera.xiaomi.remapid
+    0 1 21 20 62 60 63 61 91 90 100 101
+
+This proprietary mapping is done (or the property is used) in the file `android.hardware.camera.provider@2.4-legacy.so` but only in its MiUi variant not the AOSP one. So to provide this mapping you need to take this file from MiUi.
