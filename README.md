@@ -4,16 +4,26 @@
 Various features (48 mpix, portrat mode...) of ANXCamera are broken on custom ROMs on Mi 9 Lite (aka pyxis).
 This module goal is fix this issues so one can use __unmodified__ ANXCamera on this device with all features.
 
-_Verified on Evolution-X using ANXCamera 182 & 184_
+_Verified on Evolution-X using ANXCamera 180, 182, 184 & 185_
 
 ### What works
 - 48 MPix (aka Ultrapixel) mode
 - Ultrawide sensor
-- RAW capture in Pro mode
 - Portrait mode for back camera
+- RAW capture in Pro mode (see below how to enable)
+- Portrait mode for front camera (see below how to fix)
 
 ### What does NOT work (yet)
-- Portrait mode for front camera
+_Let me know_
+
+## Miscellaneous
+***You would need to install [ANXCamera Pro](https://play.google.com/store/apps/details?id=com.aeonax.camerapro&hl=en_US) app***
+1) How to enable RAW support
+   * Start **ANXCamera Pro**
+   * Search for ***RAW*** or ***c_r_i_m_m*** and mark it ***TRUE***
+2) How to fix front camera portrait crash
+   * Start **ANXCamera Pro**
+   * Search for ***Portrait Lighting Front/Crash*** or ***s_p_l_f*** and mark it ***FALSE***
 
 ## Technical details
 The MiuiCamera (a base for ANXCamera) uses different mapping of camera IDs than AOSP. While AOSP generates
