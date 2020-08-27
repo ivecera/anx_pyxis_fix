@@ -4,7 +4,7 @@
 Various features (48 mpix, portrat mode...) of ANXCamera are broken on custom ROMs on Mi 9 Lite (aka pyxis).
 This module goal is fix this issues so one can use __unmodified__ ANXCamera on this device with all features.
 
-_Verified on Evolution-X using ANXCamera 180, 182, 184 & 185_
+_Verified on Evolution-X 4.6 (with enforcing SELinux) using ANXCamera 180, 182, 184, 185 & 190_
 
 ### What works
 - 48 MPix (aka Ultrapixel) mode
